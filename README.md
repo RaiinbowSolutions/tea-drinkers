@@ -18,10 +18,16 @@ Testing stuff out and configuring things.
 
 ## Development Setup
 
+These things are required to run the development environment.
+
+- node v16.0.0
+- netlify-cli v11.5.1
+
+For help installing node & netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/).
+
 1. Clone project from Github.
-2. `npm install -g netlify-cli` you should have the latest Netlify CLI version.
-3. `npm install` to install dependencies.
-4. `netlify dev` to run the local runtime environment.
+2. `npm install` to install dependencies.
+3. `netlify dev` to run the local runtime environment.
 
 ## Product Documentations
 
