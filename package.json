@@ -5,10 +5,8 @@
   "description": "",
   "keywords": [
     "netlify",
-    "react",
     "express",
-    "serverless",
-    "mongodb"
+    "serverless"
   ],
   "author": "Raiinbow Solutions <raiinbowsolutions@outlook.com>",
   "license": "MIT",
