@@ -7,7 +7,7 @@
 ## Index
 
 - [Introduction](#introduction)
-- [Development Requirements](#development-requirements)
+- [Development Setup](#development-setup)
 - [Product Documentations](#product-documentations)
 - [Process Documentations](#process-documentations)
 
@@ -16,7 +16,12 @@
 This is just for fun and giggles. <br>
 Testing stuff out and configuring things.
 
-## Development Requirements
+## Development Setup
+
+1. Clone project from Github.
+2. `npm install -g netlify-cli` you should have the latest Netlify CLI version.
+3. `npm install` to install dependencies.
+4. `netlify dev` to run the local runtime environment.
 
 ## Product Documentations
 
