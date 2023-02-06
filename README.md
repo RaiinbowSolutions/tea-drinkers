@@ -7,6 +7,7 @@
 ## Index
 
 - [Introduction](#introduction)
+- [Development Requirements](#development-requirements)
 - [Development Setup](#development-setup)
 - [Product Documentations](#product-documentations)
 - [Process Documentations](#process-documentations)
@@ -16,7 +17,7 @@
 This is just for fun and giggles. <br>
 Testing stuff out and configuring things.
 
-## Development Setup
+## Development Requirements
 
 These things are required to run the development environment.
 
@@ -24,6 +25,8 @@ These things are required to run the development environment.
 - netlify-cli v11.5.1
 
 For help installing node & netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/).
+
+## Development Setup
 
 1. Clone project from Github.
 2. `npm install` to install dependencies.
