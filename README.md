@@ -19,6 +19,9 @@ Testing stuff out and configuring things.
 
 ## Development Requirements
 
+[![node](https://img.shields.io/badge/node-%5E16.0.0-informational?style=flat-square)](https://nodejs.org/en/)
+[![netlify-cli](https://img.shields.io/badge/netlify--cli-%5E11.5.1-informational?style=flat-square)](https://www.npmjs.com/package/netlify-cli)
+
 These things are required to run the development environment.
 
 - node v16.0.0
