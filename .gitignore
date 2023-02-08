@@ -42,6 +42,3 @@
 # Logs
 **/logs/
 *.log
-
-# Ignore unneeded package-lock.json
-*package-lock.json
