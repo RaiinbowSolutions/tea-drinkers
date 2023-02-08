@@ -8,7 +8,6 @@ jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [16.x]
@@ -26,8 +25,11 @@ jobs:
 
   build:
     needs: [setup]
-
     name: Building
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
     - name: Building
@@ -35,8 +37,11 @@ jobs:
 
   test:
     needs: [setup, build]
-
     name: Testing
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
     - name: Testing
@@ -44,8 +49,11 @@ jobs:
 
   deploy:
     needs: [setup, build, test]
-
     name: Deploying to Netlify
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
     - name: Deploying to Netlify
