@@ -5,9 +5,8 @@ on:
     branches: [master]
 
 jobs:
-  build:
-    name: 'Build & Test'
-
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,13 +24,31 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+  build:
+    needs: [setup]
+
+    name: Building
+
+    steps:
     - name: Building
       run: npm run build --if-present
 
+  test:
+    needs: [setup, build]
+
+    name: Testing
+
+    steps:
     - name: Testing
       run: npm run test --if-present
 
-    - name: Deploying
+  deploy:
+    needs: [setup, build, test]
+
+    name: Deploying to Netlify
+
+    steps:
+    - name: Deploying to Netlify
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
