@@ -31,11 +31,9 @@ These things are required to run the development environment.
 - netlify-cli v11.5.1
 - @angular/cli v15.1.4
 
-For help installing node.js use this [guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm);
-
-For help installing netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/).
-
-For help installing angular-cli use this [guide](https://angular.io/cli);
+For help installing node.js use this [guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). <br>
+For help installing netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/). <br>
+For help installing angular-cli use this [guide](https://angular.io/cli).
 
 ## Development Setup
 
