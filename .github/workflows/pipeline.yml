@@ -13,14 +13,23 @@ jobs:
         node-version: [16.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Cache
+      uses: actions/cache@v3
+      id: cache-data
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
     - name: Install dependencies
+      if: steps.cache-data.outputs.cache-hit != 'true'
       run: npm install
 
   build:
@@ -32,7 +41,17 @@ jobs:
         node-version: [16.x]
 
     steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: ${{ matrix.node-version }}
+        cache: 'npm'
+        
     - name: Building
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       run: npm run build --if-present
 
   test:
@@ -44,7 +63,17 @@ jobs:
         node-version: [16.x]
 
     steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: ${{ matrix.node-version }}
+        cache: 'npm'
+
     - name: Testing
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       run: npm run test --if-present
 
   deploy:
@@ -56,7 +85,17 @@ jobs:
         node-version: [16.x]
 
     steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: ${{ matrix.node-version }}
+        cache: 'npm'
+
     - name: Deploying to Netlify
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
