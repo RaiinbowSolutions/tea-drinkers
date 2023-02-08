@@ -6,6 +6,7 @@
 **/.history/
 
 # ignore build folders
+**/dist/
 **/build/
 
 # Netlify cache
