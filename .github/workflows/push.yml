@@ -15,8 +15,15 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 16.x
-        cache: npm
+    - uses: actions/cache@v3
+      id: cache-npm
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{hashFiles('**/package-lock.json')}}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - run: npm ci
+      if: steps.cache-npm.outputs.cache-hit != 'true'
     - run: npm test
     - run: npm run build --if-present
     - run: netlify deploy --prod
