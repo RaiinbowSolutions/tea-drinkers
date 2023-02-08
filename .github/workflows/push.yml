@@ -26,6 +26,8 @@ jobs:
     - run: npm install
       if: steps.cache-npm.outputs.cache-hit != 'true'
 
+    - run: npm run build --if-present
+
     - run: netlify deploy --prod
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
