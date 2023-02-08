@@ -9,7 +9,8 @@ on:
       - '**/LICENSE'
 
 jobs:
-  setup:
+  process:
+    name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -26,8 +27,6 @@ jobs:
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{hashFiles('**/package-lock.json')}}
-        restore-keys: |
-          ${{ runner.os }}-node-
 
     - name: Install Dependencies
       run: npm install
