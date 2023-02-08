@@ -2,7 +2,7 @@ name: "CI/CD Pipeline"
 
 on: 
   push:
-    branches: [master]
+    branches: [dev]
 
 jobs:
   build:
@@ -28,12 +28,3 @@ jobs:
 
     - name: Test
       run: npm run test --if-present
-
-    - name: Deploy to Netlify
-      uses: South-Paw/action-netlify-deploy@v1.2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
-        build-dir: "./"
-        comment-on-commit: true
