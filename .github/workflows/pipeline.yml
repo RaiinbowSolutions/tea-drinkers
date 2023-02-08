@@ -6,100 +6,81 @@ on:
 
 jobs:
   setup:
-    name: Setup
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name: Cache
-      uses: actions/cache@v3
-      id: cache-data
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-    - name: Install dependencies
-      if: steps.cache-data.outputs.cache-hit != 'true'
-      run: npm install
-
-  build:
-    needs: [setup]
-    name: Building
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version-file: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: .nvmrc
+        cache: npm
 
-    - name: Fetch Cache
+    - name: Cache npm dependencies
+      uses: actions/cache@v3
+      id: cache-primes
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-v3-${{ hashFiles('package-lock.json') }}
+
+    - name: Install dependencies
+      if: steps.cache-primes.outputs.cache-hit != 'true'
+      run: npm install
+
+  build:
+    needs:
+      - setup
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: .nvmrc
+        cache: npm
+
+    - name: Cache npm dependencies
       uses: actions/cache@v3
       with:
         path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
 
     - name: Building
       run: npm run build --if-present
 
   test:
-    needs: [setup, build]
-    name: Testing
+    needs:
+      - build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version-file: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: .nvmrc
+        cache: npm
 
-    - name: Fetch Cache
+    - name: Cache npm dependencies
       uses: actions/cache@v3
       with:
         path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
 
     - name: Testing
       run: npm run test --if-present
 
   deploy:
-    needs: [setup, build, test]
-    name: Deploying to Netlify
+    needs:
+      - test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version-file: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: .nvmrc
+        cache: npm
 
-    - name: Fetch Cache
+    - name: Cache npm dependencies
       uses: actions/cache@v3
       with:
         path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
 
     - name: Deploying to Netlify
       env:
