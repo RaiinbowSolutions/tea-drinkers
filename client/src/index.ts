@@ -1,3 +1,4 @@
+import "./styles.css";
 
 const element = document.getElementById("timer");
 const future = new Date("Sep 5, 2023 00:00:00");

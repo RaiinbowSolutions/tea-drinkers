@@ -39,3 +39,16 @@ p {
     font-weight: 300;
     font-family: monospace;
 }
+
+body > p {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    padding: 2em;
+}
+
+a {
+    font-family: inherit;
+    color: inherit;
+}
