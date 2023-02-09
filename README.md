@@ -17,6 +17,8 @@
 This is just for fun and giggles. <br>
 Testing stuff out and configuring things.
 
+Trying to make a good CI/CD workflow.
+
 ## Development Requirements
 
 [![node](https://img.shields.io/badge/node-%5E16.0.0-informational?style=flat-square)](https://nodejs.org/en/)
