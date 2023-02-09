@@ -17,7 +17,7 @@
 This is just for fun and giggles. <br>
 Testing stuff out and configuring things.
 
-Trying to make a good CI/CD workflow.
+Trying to make a good CI/CD workflow. This is something new for the team.
 
 ## Development Requirements
 
