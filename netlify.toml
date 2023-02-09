@@ -6,11 +6,7 @@ base = "/"
 
 [dev]
 command = "npm run start"
+targetPort = 3000
 functionsPort = 9000
 port = 8080
 envFiles = [".env.development.local", ".env.local", ".env.development", ".env"]
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
