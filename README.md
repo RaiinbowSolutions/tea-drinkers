@@ -21,17 +21,14 @@ Testing stuff out and configuring things.
 
 [![node](https://img.shields.io/badge/node-%5E16.0.0-informational?style=flat-square)](https://nodejs.org/en/)
 [![netlify-cli](https://img.shields.io/badge/netlify--cli-%5E11.5.1-informational?style=flat-square)](https://www.npmjs.com/package/netlify-cli)
-[![angular-cli](https://img.shields.io/badge/@angular/cli-%5E15.1.4-informational?style=flat-square)](https://www.npmjs.com/package/@angular/cli)
 
 These things are required to run the development environment.
 
 - node.js v16.0.0
 - netlify-cli v11.5.1
-- @angular/cli v15.1.4
 
 For help installing node.js use this [guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). <br>
-For help installing netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/). <br>
-For help installing angular-cli use this [guide](https://angular.io/cli).
+For help installing netlify-cli use this [guide](https://docs.netlify.com/cli/get-started/).
 
 ## Development Setup
 
