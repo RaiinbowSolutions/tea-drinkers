@@ -4,7 +4,7 @@
   "scripts": {
     "start": "cross-env BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test --passWithNoTests"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
