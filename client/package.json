@@ -2,8 +2,9 @@
   "name": "tea-drinkers-client",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "cross-env BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
