@@ -2,11 +2,13 @@ name: Continuous Integration
 
 on: 
   pull_request:
+    types: [opened, reopened, synchronize]
     branches:
       - master
     paths-ignore:
       - '**/*.md'
       - '**/LICENSE'
+      - '**/.gitignore'
 
 jobs:
   process:
@@ -30,8 +32,28 @@ jobs:
     - name: Test
       run: npm run test --if-present
 
+  deploy:
+    name: Build & Deploy preview
+    needs:
+      - process
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build --if-present
+
     - name: Deploy Preview
-      run: netlify deploy --alias deploy-preview-${{ github.event.number }}
+      run: netlify deploy --build --context deploy-preview --alias deploy-preview-${{ github.event.number }}
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -55,5 +77,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✔️ Deploy Preview for funny-daffodil-56f143 ready!<br>🔨 Explore the source changes: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br>😎 Browse the preview: [https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/](https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/)'
+            body: '✔️ Deploy Preview for funny-daffodil-56f143 ready!<br><br>🔨 Explore the source changes: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br><br>😎 Browse the preview: [https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/](https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/)'
           })
