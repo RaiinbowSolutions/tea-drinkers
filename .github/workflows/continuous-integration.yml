@@ -11,7 +11,7 @@ on:
       - '**/.gitignore'
 
 jobs:
-  process:
+  build-test:
     name: Build & Test
     runs-on: ubuntu-latest
     steps:
@@ -33,9 +33,9 @@ jobs:
       run: npm run test --if-present
 
   deploy:
-    name: Build & Deploy preview
+    name: Deploy preview
     needs:
-      - process
+      - build-test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -49,9 +49,6 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Build
-      run: npm run build --if-present
-
     - name: Deploy Preview
       run: netlify deploy --build --context deploy-preview --alias deploy-preview-${{ github.event.number }}
       env:
@@ -61,7 +58,7 @@ jobs:
   commit:
     name: Commit on PR
     needs:
-      - process
+      - deploy
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
