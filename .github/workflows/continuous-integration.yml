@@ -9,6 +9,26 @@ on:
       - '**/LICENSE'
 
 jobs:
+  commit:
+    name: Commit on PR
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Comment PR
+      uses: actions/github-script@v5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✔️ Deploy Preview for funny-daffodil-56f143 ready!<br>🔨 Explore the source changes: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br>😎 Browse the preview: [https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/](https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/)'
+          })
+
   process:
     name: Continuous Integration
     runs-on: ubuntu-latest
@@ -26,18 +46,6 @@ jobs:
 
     - name: Build
       run: npm run build --if-present
-
-    - name: Comment PR
-      uses: actions/github-script@v5
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: '👋 Thanks for reporting!'
-          })
 
     - name: Test
       run: npm run test --if-present
