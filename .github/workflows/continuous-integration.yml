@@ -50,7 +50,7 @@ jobs:
       run: npm install
 
     - name: Deploy Preview
-      run: netlify deploy --build --context deploy-preview --alias deploy-preview-${{ github.event.number }}
+      run: netlify deploy --build --alias ${{ github.sha }} --message "Deploy preview of PR ${{ github.sha }}"
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -74,5 +74,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✔️ Deploy Preview for funny-daffodil-56f143 ready!<br><br>🔨 Explore the source changes: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br><br>😎 Browse the preview: [https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/](https://deploy-preview-${{ github.event.number }}--funny-daffodil-56f143.netlify.app/)'
+            body: '✔️ Deploy preview for funny-daffodil-56f143 ready!<br><br>🔨 Explore the source changes: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br><br>😎 Browse the preview: [https://${{ github.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.sha }}--funny-daffodil-56f143.netlify.app/)'
           })
