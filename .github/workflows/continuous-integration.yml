@@ -50,7 +50,7 @@ jobs:
       run: npm install
 
     - name: Deploy Preview
-      run: netlify deploy --build --alias ${{ github.event.pull_request.head.sha }} --message "Deploy preview of PR $(git rev-parse --short ${{ github.event.pull_request.head.sha }})"
+      run: netlify deploy --build --alias ${{ github.event.pull_request.head.sha }} --message "Deploy preview of PR https://github.com/${{ github.repository }}/pull/${{ github.event.number }}/commits/${{ github.event.pull_request.head.sha }}"
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -74,5 +74,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✔️ Deploy preview for [$(git rev-parse --short ${{ github.event.pull_request.head.sha }})](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}/commits/${{ github.event.pull_request.head.sha }} ready!<br><br>😎 Browse the preview: [https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/)'
+            body: '✔️ Deploy preview for ${{ github.event.pull_request.head.sha }} ready!<br><br>😎 Browse the preview: [https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/)'
           })
