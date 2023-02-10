@@ -1,6 +1,6 @@
 # Tea Drinkers
 
-[![Build](https://img.shields.io/netlify/a6806521-011c-4868-bc66-8d25083339d0?style=for-the-badge&logo=netlify&logoColor=#00C7B7)](https://funny-daffodil-56f143.netlify.app/)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/RaiinbowSolutions/tea-drinkers/continuous-deployment.yml?style=for-the-badge)
 [![Version](https://img.shields.io/github/package-json/v/RaiinbowSolutions/tea-drinkers?style=for-the-badge)](package.json)
 [![License](https://img.shields.io/github/license/RaiinbowSolutions/tea-drinkers?style=for-the-badge)](LICENSE)
 
