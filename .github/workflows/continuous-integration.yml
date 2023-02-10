@@ -74,5 +74,5 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '✔️ Deploy preview for ${{ github.event.pull_request.head.sha }} ready!<br><br>😎 Browse the preview: [https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/)'
+            body: '✔️ Deploy preview for ${{ github.event.pull_request.head.sha }} is ready!<br>💭 Browse the preview: [https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/)'
           })
