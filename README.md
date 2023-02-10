@@ -1,8 +1,8 @@
 # Tea Drinkers
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/RaiinbowSolutions/tea-drinkers/continuous-deployment.yml?style=for-the-badge)
-[![Version](https://img.shields.io/github/package-json/v/RaiinbowSolutions/tea-drinkers?style=for-the-badge)](package.json)
-[![License](https://img.shields.io/github/license/RaiinbowSolutions/tea-drinkers?style=for-the-badge)](LICENSE)
+![Version](https://img.shields.io/github/package-json/v/RaiinbowSolutions/tea-drinkers?style=for-the-badge)
+![License](https://img.shields.io/github/license/RaiinbowSolutions/tea-drinkers?style=for-the-badge)
 
 ## Index
 
@@ -16,6 +16,8 @@
 
 This is just for fun and giggles. <br>
 Testing stuff out and configuring things.
+
+View demo website at: [https://funny-daffodil-56f143.netlify.app/](https://funny-daffodil-56f143.netlify.app/)
 
 ## Development Requirements
 
