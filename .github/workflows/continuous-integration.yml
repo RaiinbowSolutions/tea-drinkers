@@ -2,15 +2,17 @@ name: Continuous Integration
 
 on: 
   pull_request:
+    types: [opened, reopened, synchronize]
     branches:
       - master
     paths-ignore:
       - '**/*.md'
       - '**/LICENSE'
+      - '**/.gitignore'
 
 jobs:
-  process:
-    name: Continuous Integration
+  build-test:
+    name: Build & Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -29,3 +31,48 @@ jobs:
 
     - name: Test
       run: npm run test --if-present
+
+  deploy:
+    name: Deploy preview
+    needs:
+      - build-test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Deploy Preview
+      run: netlify deploy --build --alias ${{ github.event.pull_request.head.sha }} --message "Deploy preview of PR https://github.com/${{ github.repository }}/pull/${{ github.event.number }}/commits/${{ github.event.pull_request.head.sha }}"
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  commit:
+    name: Commit on PR
+    needs:
+      - deploy
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Comment PR
+      uses: actions/github-script@v5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✔️ Deploy preview for ${{ github.event.pull_request.head.sha }} is ready!<br>💭 Browse the preview: [https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/](https://${{ github.event.pull_request.head.sha }}--funny-daffodil-56f143.netlify.app/)'
+          })
